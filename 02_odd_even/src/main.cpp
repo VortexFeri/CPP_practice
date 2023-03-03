@@ -7,17 +7,23 @@ void printOddOrEven(int number)
 {
 	if (number % 2 == 0)
 	{
-		printf("EVEN\n");
+		printf("%d: EVEN\n", number);
 	}
 	else
 	{
-		printf("ODD\n");
+		printf("%d: ODD\n", number);
 	}
 }
+bool isNumber(std::string s) {
+	for (char c : s) {
+		// If argument is NaN display that
+		if (!isdigit(c)) return false;
+	}
+	return true;
+}
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
-	int number = -13;
 
 	// What is this program expected to do?
 	// - Shows whether an argument is an ODD or EVEN number.
@@ -34,24 +40,19 @@ int main(int argc, char *argv[])
 	if (argc <= 1)
 	{
 		printf("No program arguments found.\n");
+		return 0;
 	}
 	
-	// TODO(Gusti): i don't know why this doesn't work, but someone please FIX it.
-	// --------------- start
-
-	// Get the first argument
-	std::string argumentAsString = argv[1];
-	const char* argumentAsCharArray = argumentAsString.c_str();
-
-	//number = argv[1]; // No
-	//should use atoi?
-	// or std::stoi?
-
-	std::cout << argumentAsString << std::endl; // i think this should be removed
-
-	// --------------- stop
-
-	printOddOrEven(number);
+	// Display if each argument is odd or even
+	for (int i = 1; i < argc; i++) {
+		std::string argAsString(argv[i]);
+		if (isNumber(argAsString)) {
+			printOddOrEven(stoi(argAsString));
+		}
+		else 
+		// If argument is NaN display that
+			std::cout << argAsString << ": Not a Number!\n";
+		}
 
 	return 0;
 }

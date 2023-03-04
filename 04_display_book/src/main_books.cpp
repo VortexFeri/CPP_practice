@@ -35,16 +35,20 @@ struct Book
 	{
 		// TODO: add an author to the container authors array.
 		numAuthors++;
+		authors[numAuthors-1] = author;
 	}
 
 	void print()
 	{
 		std::cout << "Book #" << id << std::endl;
 		std::cout << "------" << std::endl;
-		std::cout << this->title << std::endl;
+		std::cout << this->title << std::endl << "-" << std::endl;
 
 		// TODO: add all authors
-
+		for (int i = 0; i < numAuthors; i++) {
+			authors[i].print();
+		}
+	std::cout << std::endl;
 	}
 };
 

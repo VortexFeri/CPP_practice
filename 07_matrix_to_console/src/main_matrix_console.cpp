@@ -13,16 +13,25 @@ private:
 
 	// TODO: store the data
 	// hints: you can use std::string, std::vectors + string, char**, vector<vector<char>>, etc
+
+	std::vector<std::string> elements;
 public:
 	Matrix(size_t numColumnsX, size_t numLinesY)
-		// TODO: add functionality
 	{
 		// TODO: add functionality
+		column_count = numColumnsX;
+		line_count = numLinesY;
+		for (int i = 0; i < line_count; i++)
+			elements.push_back("");
 	}
 
 	// Set an entire line
 	void setLine(size_t line_number, const std::string& data)
 	{
+		if (line_number < line_count) {
+			std::string trimmedData = data.substr(0, column_count);
+			elements[line_number] = trimmedData;
+		}
 	}
 
 	//OPTIONAL
@@ -55,12 +64,18 @@ public:
 	void setCellXY(size_t x, size_t y, char cell_content)
 	{
 		// TODO: add functionality
+		if (x <= column_count && y < line_count)
+			elements[y][x] = cell_content;
 	}
 
 	void print()
 	{
 		// print all lines and columns
 		// TODO: add functionality
+		for (int i = 0; i < line_count; i++) {
+			std::cout << this->elements[i] << std::endl;
+		}
+		std::cout << std::endl;
 	}
 };
 

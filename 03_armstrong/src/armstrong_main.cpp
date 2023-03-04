@@ -1,10 +1,16 @@
 #include <iostream>
+#include <string>
 
 bool isArmstrongNumber(int number)
 {
 	// TODO: implement some functionality to see if this number is an armstrong number
+	int sum = 0, temp = number;
+	do {
+		sum += pow((temp % 10),3);
+		temp /= 10;
+	} while (temp > 0);
 
-	return false;
+	return sum == number;
 }
 
 void printIsArmstrong(int number)
@@ -47,12 +53,18 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	int readNumber = 0;
 	// Get the first argument
 	std::string argumentAsString = argv[1];
 	
 	// TODO: read number / cast to integer
-
-	printIsArmstrong(readNumber);
+	try
+	{
+		// current command-line argument is 'a', so Undefined output should be displayed
+		printIsArmstrong(stoi(argumentAsString));
+	}
+	catch (const std::exception&)
+	{
+		std::cout << "Undefined output." << std::endl;
+	}
 	return 0;
 }

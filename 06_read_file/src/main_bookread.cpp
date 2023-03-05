@@ -38,20 +38,12 @@ std::vector<Book> readBooksFromTextFile(const std::string& file_name)
 	// TODO: BEGIN read the file -------------------------------------
 
 	std::ifstream input(file_name);
-	int counter = 0;
-	std::string line;
-	std::string temp;
-	while (getline(input, line)) {
-		counter++;
-		if (counter % 2 != 0) {
-			temp = line;
-		}
-		else {
-			Book book;
-			book.name = temp;
-			book.authors = line;
-			results.emplace_back(book);
-		}
+	std::string lineEven, lineOdd;
+	while (getline(input, lineOdd) && getline(input, lineEven)) {
+		Book book;
+		book.name = lineOdd;
+		book.authors = lineEven;
+		results.emplace_back(book);
 	}
 
 	// E.g. Book myBook;

@@ -48,15 +48,20 @@ std::vector<Book> readBooksFromIniFile(const std::string& file_name)
 	std::vector<Book> results;
 	// TODO: BEGIN read the file -------------------------------------
 	
-	// E.g. Book myBook;
-	//		// build the section name (E.g. book.1)
-	//		std::stringstream ss;
-	//		ss << "book." << (i + 1);
-	//		// Copy the stream to a string you can use
-	//		std::string section_name(ss.str());
+	CSimpleIniA ini;
+	SI_Error rc = ini.LoadFile(file_name.c_str());
+	if (rc < 0) {
+		std::cout << "An error ocurred while loading the file";
+	}
 
-	//		...
-	//		results.emplace_back(myBook);
+	int bookCount = std::stoi(ini.GetValue("books", "count"));
+	for (int i = 1; i <= bookCount; i++) {
+		Book book;
+		std::string section = "book." + std::to_string(i);
+		book.name = ini.GetValue(section.c_str(), "name");
+		book.authors = ini.GetValue(section.c_str(), "author");
+		results.emplace_back(book);
+	}
 
 	// TODO: END read file and add to results vector ------------------
 	return results;
@@ -68,7 +73,7 @@ int main()
 	// Using the SimpleINI C++ Lib: https://github.com/brofield/simpleini
 
 	// Read the data
-	std::string input_data("PATH_TO_INI_FILE.ini");
+	std::string input_data("../../data/ermahgerd_berks.ini");
 	std::cout << "Reading the data from " << input_data << std::endl;
 	std::vector<Book> books_from_file = readBooksFromIniFile(input_data);
 

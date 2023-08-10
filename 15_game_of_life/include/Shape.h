@@ -12,7 +12,7 @@ enum Shape {
 	PENTADECATHLON
 };
 
-std::vector<std::vector<bool>> getShape(Shape shape) {
+inline std::vector<std::vector<bool>> getShape(Shape shape) {
 	std::vector<std::vector<bool>> selectedShape;
 	switch (shape) {
 	case BLOCK:
